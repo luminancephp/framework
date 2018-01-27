@@ -24,7 +24,7 @@ Luminance is a modern PHP framework, designed with love using PHP 7.1, ready for
 To install Luminance, ensure you have PHP 7.0 or above installed, and run:
 
 ```shell
-git clone https://github.com/luminance/framework.git
+git clone https://github.com/luminancephp/framework.git
 ```
 
 Now, change into the folder, and open your text editor. Change the application and database configuration paths in app/Configuration folder
