@@ -115,12 +115,8 @@ class Accounts extends Table
     /**
      * This is a sample method, that queries a sample data set for it's ID, and returns the PDO object
      */
-    public function getUserById($user_id)
+    public function getUserById(int $user_id)
     {
-        if(!is_numeric($user_id))
-        {
-            return null;
-        }
         $this->setQueryString("SELECT * FROM accounts WHERE id = ?");
         $this->replacements = array(
             $user_id
