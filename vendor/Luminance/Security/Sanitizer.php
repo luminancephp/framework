@@ -33,10 +33,10 @@ class Sanitizer
     /**
      * Accepts either a string, or array of strings
      *
-     * @param $string
+     * @param string $string
      * @param array $strings
      */
-    public function __construct($string = "", array $strings = array())
+    public function __construct(string $string = "", array $strings = array())
     {
         if(!empty($string) && $string !== null)
         {
@@ -55,7 +55,7 @@ class Sanitizer
      *
      * @return string
      */
-    protected function sanitize($string)
+    protected function sanitize(string $string)
     {
         $this->input_content = $string;
         return htmlentities($string);

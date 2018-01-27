@@ -51,7 +51,7 @@ class Parser
      * @param string $template_name
      * @param array $replacements
      */
-    public function __construct($template_name, array $replacements = array())
+    public function __construct(string $template_name, array $replacements = array())
     {
         $this->template_name = $template_name;
         if(!empty($replacements))
@@ -98,7 +98,7 @@ class Parser
      *
      * @param string $template_name
      */
-    public function setTemplate($template_name)
+    public function setTemplate(string $template_name)
     {
         $this->template_name = $template_name;
         $this->findTemplatePath();
@@ -149,7 +149,7 @@ class Parser
      *
      * @return string
      */
-    public function render($return = false)
+    public function render(bool $return = false)
     {
         $template_content = $this->template_content;
         $this->addApplicationConfigToReplacements();

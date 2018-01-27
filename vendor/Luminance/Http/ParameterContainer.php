@@ -86,7 +86,7 @@ class ParameterContainer
      *
      * @return mixed
      */
-    public function get($key, $default)
+    public function get(string $key, string $default)
     {
         if(array_key_exists($key, $this->parameters))
         {
@@ -101,7 +101,7 @@ class ParameterContainer
      * @param string $key
      * @param mixed $value
      */
-    public function set($key, $value)
+    public function set(string $key, $value)
     {
         $this->parameters[$key] = $value;
     }
@@ -111,7 +111,7 @@ class ParameterContainer
      *
      * @param string $key
      */
-    public function remove($key)
+    public function remove(string $key)
     {
         unset($this->parameters[$key]);
     }

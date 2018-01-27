@@ -68,7 +68,7 @@ class FileContainer extends ParameterContainer
      *
      * @return boolean
      */
-    public function isFileExtensionSafe($file_index)
+    public function isFileExtensionSafe(string $file_index)
     {
         $file_name_tmp = basename($this->parameters[$file_index]["name"]);
         $image_file_type = strtolower(pathinfo($file_name_tmp, \PATHINFO_EXTENSION));
@@ -86,7 +86,7 @@ class FileContainer extends ParameterContainer
      *
      * @return mixed
      */
-    public function save($file_index)
+    public function save(string $file_index)
     {
         $target = $this->upload_directory . "/" . basename($this->parameters[$file_index]["name"]);
         if(file_exists($this->upload_directory . "/" . basename($this->parameters[$file_index]["name"])))
@@ -117,7 +117,7 @@ class FileContainer extends ParameterContainer
      *
      * @return boolean
      */
-    public function delete($file_index)
+    public function delete(string $file_index)
     {
         if(isset($this->parameters[$file_index]))
         {
@@ -134,7 +134,7 @@ class FileContainer extends ParameterContainer
      *
      * @return boolean
      */
-    public function deleteByPath($file_path)
+    public function deleteByPath(string $file_path)
     {
         if(file_exists($file_path))
         {

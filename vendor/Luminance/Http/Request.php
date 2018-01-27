@@ -126,7 +126,7 @@ class Request
      *
      * @return mixed
      */
-    public function get($key, $default="")
+    public function get(string $key, string $default="")
     {
         if($this->request->get($key, $default))
         {

@@ -53,7 +53,7 @@ class QueryBuilder extends Table
      *
      * @return QueryBuilder
      */
-    public function select($single_field_or_fields)
+    public function select(string $single_field_or_fields)
     {
         $this->select_fields = $single_field_or_fields;
         return $this;
@@ -66,7 +66,7 @@ class QueryBuilder extends Table
      *
      * @return QueryBuilder
      */
-    public function from($table_name)
+    public function from(string $table_name)
     {
         $this->from_table = $table_name;
         return $this;
@@ -81,7 +81,7 @@ class QueryBuilder extends Table
      *
      * @return QueryBuilder
      */
-    public function where($field, $comparison = "=", $equals)
+    public function where(string $field, string $comparison = "=", string $equals)
     {
         $this->where_fields[] = array("field" => $field, "comparison" => $comparison, "equals" => $equals);
         return $this;
@@ -95,7 +95,7 @@ class QueryBuilder extends Table
      *
      * @return QueryBuilder
      */
-    public function insert($table_name)
+    public function insert(string $table_name)
     {
         $this->from($table_name);
         $this->strategy = "insert";

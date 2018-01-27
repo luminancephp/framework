@@ -40,7 +40,7 @@ class SessionContainer extends ParameterContainer
      * @param string $key
      * @param mixed $value
      */
-    public function set($key, $value)
+    public function set(string $key, $value)
     {
         $_SESSION[$key] = $value;
         $this->parameters[$key] = $value;

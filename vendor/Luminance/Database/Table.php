@@ -116,7 +116,7 @@ class Table
      *
      * @param string $table_name
      */
-    public function setTableName($table_name)
+    public function setTableName(string $table_name)
     {
         $this->table_name = $table_name;
     }
@@ -146,7 +146,7 @@ class Table
      *
      * @param string $query_string
      */
-    public function setQueryString($query_string = "")
+    public function setQueryString(string $query_string = "")
     {
         $this->query = $query_string;
     }

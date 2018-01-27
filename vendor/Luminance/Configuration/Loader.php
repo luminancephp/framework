@@ -38,18 +38,31 @@ class Loader
         }
     }
 
+    protected function castAsObject()
+    {
+        $this->config = (object) $this->config;
+    }
+
     /**
      * If you supply a file name, we will automatically load the configuration
-     * file into the $config object
+     * file into the $config object. If you flag as_object, it will cast
+     * the array into an object, but will only convert the first level,
+     * if you need to convert from there, it can be done with
+     * json_decode(json_encode($array));
      *
      * @param string $file_name
+     * @param boolean $as_object
      */
-    public function __construct($file_name = "")
+    public function __construct(string $file_name = "", bool $as_object = false)
     {
         if(isset($file_name) && !empty($file_name))
         {
             $this->file_name = $file_name;
             $this->getConfig();
+            if($as_object)
+            {
+                $this->castAsObject();
+            }
         }
     }
 
@@ -58,7 +71,7 @@ class Loader
      *
      * @param $config_name string
      */
-    public function load($config_name)
+    public function load(string $config_name)
     {
         $this->file_name = $config_name;
         $this->getConfig();

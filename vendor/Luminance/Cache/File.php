@@ -42,7 +42,7 @@ class File
      *
      * @param string $cache_directory Optional cache directory
      */
-    public function __construct($cache_directory = "")
+    public function __construct(string $cache_directory = "")
     {
         if(!empty($cache_directory))
         {
@@ -57,7 +57,7 @@ class File
      * @param string $expiry
      * @param array $details
      */
-    public function addToCache($cache_content, $expiry = "50000", array $details = array())
+    public function addToCache(string $cache_content, int $expiry = 50000, array $details = array())
     {
         $details["expiry"] = $expiry;
         $this->writeCacheFile(mt_rand().$expiry.".cache", $cache_content, $details);
@@ -71,7 +71,7 @@ class File
      * @param string $content
      * @param array $details
      */
-    protected function writeCacheFile($file, $content, $details)
+    protected function writeCacheFile(string $file, string $content, array $details)
     {
         $path = $this->cache_directory . "/" . $file;
         file_put_contents($path, $content);
