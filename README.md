@@ -6,6 +6,8 @@
 
 Luminance is a modern PHP framework, designed with love using PHP 7.1, ready for use immediately out of the box.
 
+[Documentation](https://luminance.netlify.com/#/)
+
 ## Features
 
 - PSR4 Autoloader
