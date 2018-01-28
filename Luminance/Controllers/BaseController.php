@@ -17,8 +17,8 @@ use Luminance\Security\Sanitizer;
 
 class BaseController
 {
-    private $request;
-    private $response;
+    public $request;
+    public $response;
 
     public function __construct()
     {
