@@ -28,6 +28,11 @@ spl_autoload_register(function ($class) {
     }
 });
 
+
+/**
+ * Luminance Router
+ */
+
 $request_uri = $_SERVER['REQUEST_URI'];
 $app_config = new \Luminance\Configuration\Loader("application");
 
@@ -37,7 +42,7 @@ if($request_uri === "/")
     {
         $default_route = $app_config->config["default_route"];
         $splitter = explode("/", $default_route);
-        $hier_prefix = "Controllers\\$splitter[0]";
+        $hier_prefix = "App\\Controllers\\$splitter[0]";
         if(class_exists($hier_prefix))
         {
             $controller = new $hier_prefix;
@@ -72,7 +77,7 @@ else if(isset($app_config->config["routes"][$request_uri]))
     $index = $app_config->config["routes"][$request_uri];
     $controller = $index["controller"];
     $controller_arr = explode("/", $controller);
-    $hier = "Controllers\\".$controller_arr[0];
+    $hier = "App\\Controllers\\".$controller_arr[0];
     if(class_exists($hier))
     {
         $controller = new $hier();
@@ -98,7 +103,7 @@ else if(isset($app_config->config["routes"][$request_uri]))
 else
 {
     $parts = explode("/", $request_uri);
-    $hier_prefix = "Controllers\\$parts[1]";
+    $hier_prefix = "App\\Controllers\\$parts[1]";
     if(class_exists($hier_prefix))
     {
         $controller = new $hier_prefix;
