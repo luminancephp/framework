@@ -1,0 +1,20 @@
+{
+  "name": "luminance/framework",
+  "description": "Modern PHP Framework designed for high-performance web applications",
+  "keywords": ["luminance", "framework", "luminance-framework"],
+  "type": "package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michael",
+      "email": "michaeldoestech@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Luminance": "Luminance/"
+    }
+  },
+  "version": "1.0.0",
+  "minimum-stability": "dev"
+}
