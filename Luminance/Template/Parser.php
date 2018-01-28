@@ -125,18 +125,21 @@ class Parser
      */
     protected function addApplicationConfigToReplacements()
     {
-        $app_config = new Loader("application");
+    	$app_config = new Loader("application");
         $array_of_config = $app_config->config;
         $replacements = $this->replacements;
-        foreach($array_of_config as $item => $value)
+        if(is_array($array_of_config))
         {
-            if(is_array($value))
+            foreach($array_of_config as $item => $value)
             {
-                unset($array_of_config[$item]); // strip multi-level arrays
+                if(is_array($value))
+                {
+                    unset($array_of_config[$item]); // strip multi-level arrays
+                }
             }
+            $final = array_merge($replacements, $array_of_config);
+            $this->replacements = $final;
         }
-        $final = array_merge($replacements, $array_of_config);
-        $this->replacements = $final;
     }
 
     /**
