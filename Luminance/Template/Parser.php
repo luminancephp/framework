@@ -1,6 +1,6 @@
 <?php
 /**
- * @file Luminance/Http/Parser.php
+ * @file Luminance/Template/Parser.php
  * @namespace Luminance\Template
  * @version 1.0.0
  * @copyright 2017-2018
@@ -143,6 +143,80 @@ class Parser
     }
 
     /**
+     * This logical replacement will simply parse and replace
+     * anything with the syntax listed below in the examples.
+     * We use the syntax class for the logical replacements
+     * and if we need to extend templates, etc. and we
+     * write them to the local cache storage.
+     *
+     * @param string $content
+     *
+     * @return string
+     */
+    protected function runLogicalReplacements(string $content = "") : string
+    {
+        if(stristr($content, "{%"))
+        {
+            $set_regex = "/\{\%.*set.*\%\}/i";
+            preg_match_all($set_regex, $content, $matches, PREG_PATTERN_ORDER);
+            if(count($matches) > 0)
+            {
+                foreach($matches as $match)
+                {
+                    $tmp = $match[0];
+                    $orig = $tmp;
+                    // echo $orig;
+                    // echo "\n";
+                    $new = str_replace("{% set ", "", $orig);
+                    $new = str_replace(" %}", "", $new);
+                    $words = explode(" ", $new, 3);
+                    $final = '<?php '."$".$words[0]." = " . $words[2] . ";" .' ?>';
+                    $content = str_replace($orig, $final, $content);
+                }
+            }
+            $foreach_end_regex = "/\{\%.*endforeach.*\%\}/i";
+            preg_match_all($foreach_end_regex, $content, $f_matches, PREG_PATTERN_ORDER);
+            if(count($f_matches) > 0)
+            {
+                foreach($f_matches as $match)
+                {
+                    $tmp = $match[0];
+                    $orig = $tmp;
+                    $new = str_replace('{% endforeach %}', '<?php endforeach; ?>', $orig);
+                    $content = str_replace($orig, $new, $content);
+                }
+            }
+            $foreach_regex = "/\{\%.*foreach.*\%\}/i";
+            preg_match_all($foreach_regex, $content, $fe_matches, PREG_PATTERN_ORDER);
+            if(count($fe_matches) > 0)
+            {
+                foreach($fe_matches as $match)
+                {
+                    $tmp = $match[0];
+                    $orig = $tmp;
+                    $new = str_replace('{% foreach', '<?php foreach(', $orig);
+                    $new = str_replace(' %}', '): ?>', $orig);
+                    $content = str_replace($orig, $new, $content);
+                }
+            }
+            $simple_replacement = "/\@.*\;/i";
+            preg_match_all($simple_replacement, $content, $sr_matches, PREG_PATTERN_ORDER);
+            if(count($sr_matches) > 0)
+            {
+                foreach($fe_matches as $match)
+                {
+                    $tmp = $match[0];
+                    $orig = $tmp;
+                    $new = str_replace('@', '<?php echo ', $orig);
+                    $new = str_replace(';', '; ?>', $orig);
+                    $content = str_replace($orig, $new, $content);
+                }
+            }
+        }
+        return $content;
+    }
+
+    /**
      * This will run through and make the replacements
      * in the template specified, with it's content
      * being replaced, updated, and then returned
@@ -161,6 +235,7 @@ class Parser
         {
             $template_content = str_replace('{{ '.$replacement.' }}', $value, $template_content);
         }
+        $this->runLogicalReplacements($template_content);
         $this->template_content = $template_content;
         if($return)
         {
