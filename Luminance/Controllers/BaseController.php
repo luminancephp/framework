@@ -29,6 +29,10 @@ class BaseController
         /**
          * Automatically generate CSRF token
          */
-        $this->csrf->generateToken();
+        $class = get_class($this);
+        if(!stristr($class, "Api"))
+        {
+            $this->csrf->generateToken();
+        }
     }
 }
